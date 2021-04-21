@@ -31,19 +31,43 @@ let markdownParser: Grammar = Grammar(rules: markdownSyntax)
 // [] optional
 // {} zero or more
 
+let testSyntax = #"""
+        root = ab+
+        ab = a / b
+        a = "a"
+        b = "b"
+"""#
+
+
 let mdlSyntax = #"""
-        mdl = argument_list+
-        argument_list = _ "(" _ named_argument _ ")" _
-        named_argument = "bla" _ ":" _ "laber" _
+        root = argument_list
+
+        argument_list = "(" _
+                                arguments
+                        ")" _
+
+        arguments = named_arguments / positional_named_arguments
+
+        named_arguments = named_argument additional_named_argument*
+        named_argument = "bla" _ ":" _ "laber"
+        additional_named_argument = "," _ named_argument _
+
+        positional_named_arguments = positional_argument additional_positional_argument* additional_named_argument*
+        positional_argument = "pos" _
+        additional_positional_argument = "," _ positional_argument
         _ = whitespace
         whitespace = ~"\s*"
 """#
 
-let mdlText = " ( bla:   laber ) "
+//let text = "(bla: laber, bla: laber)"
+let text = "(pos, pos, bla: laber)"
 
-let mdlParser = Grammar(rules: mdlSyntax)
+//let syntax = testSyntax
+let syntax = mdlSyntax
 
-guard let ast = mdlParser.parse(for: mdlText, with: "mdl") else {
+let parser = Grammar(rules: syntax)
+
+guard let ast = parser.parse(for: text, with: "root") else {
         print("Error")
         exit(-1)
 }
