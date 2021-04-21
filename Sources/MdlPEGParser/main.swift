@@ -7,14 +7,11 @@ import SwiftPEG
 let syntax = #"""
         root = argument_list
 
-        argument_list = "(" _
-                                arguments
-                        ")" _
-
+        argument_list = "(" _ arguments ")" _
         arguments = named_arguments / positional_named_arguments
 
         named_arguments = named_argument additional_named_argument*
-        named_argument = "bla" _ ":" _ "laber"
+        named_argument = "bla" _ ":" _ "laber" _
         additional_named_argument = "," _ named_argument _
 
         positional_named_arguments = positional_argument additional_positional_argument* additional_named_argument*
