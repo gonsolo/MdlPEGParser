@@ -5,7 +5,8 @@ import SwiftPEG
 // {} zero or more
 
 let syntax = #"""
-        root = argument_list
+        root = comment whitespace a
+        a = "a"
 
         argument_list = "(" _ arguments ")" _
         arguments = named_arguments / positional_named_arguments
@@ -18,10 +19,12 @@ let syntax = #"""
         positional_argument = "pos" _
         additional_positional_argument = "," _ positional_argument _
 
-        _ = whitespace
-        whitespace = ~"\s*"
+        _ = ignore*
+        ignore = whitespace / comment
+        whitespace = ~"(\s|\n)*"
+        comment = ~"/\*((.|\n)*?)\*/"
 """#
-
+ 
 guard CommandLine.argc == 2 else {
         print("Usage: MdlPEGParser <file>")
         exit(0)
@@ -29,17 +32,16 @@ guard CommandLine.argc == 2 else {
 
 let fileName = CommandLine.arguments[1]
 let input = try String(contentsOfFile: fileName)
-
 let parser = Grammar(rules: syntax)
 
 guard let ast = parser.parse(for: input, with: "root") else {
-        print("Error!")
+        print("Error parsing!")
         exit(-1)
 }
 guard let simplifiedAst = simplify(for: ast) else {
-        print("Error!")
+        print("Error simplifying!")
         exit(-1)
 
 }
-//print(simplifiedAst)
+print(simplifiedAst)
 print("Ok.")
