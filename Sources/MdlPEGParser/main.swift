@@ -27,13 +27,13 @@ let text = "(pos, pos, bla: laber, bla: laber)"
 let parser = Grammar(rules: syntax)
 
 guard let ast = parser.parse(for: text, with: "root") else {
-        print("Error")
+        print("Error!")
         exit(-1)
 }
 guard let simplifiedAst = simplify(for: ast) else {
-        print("Error")
+        print("Error!")
         exit(-1)
 
 }
-print(simplifiedAst)
-
+//print(simplifiedAst)
+print("Ok.")
