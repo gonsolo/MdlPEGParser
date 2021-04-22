@@ -5,10 +5,7 @@ import SwiftPEG
 // {} zero or more
 
 let syntax = #"""
-        root = ignore* bla+
-        ignore = comment / whitespace
-        x = whitespace / comment
-        bla = "bla" whitespace
+        root = _ argument_list
 
         argument_list = "(" _ arguments ")" _
         arguments = named_arguments / positional_named_arguments
@@ -22,6 +19,7 @@ let syntax = #"""
         additional_positional_argument = "," _ positional_argument _
 
         _ = ignore*
+        ignore = comment / whitespace
         whitespace = ~"\s*"
         comment = ~"/\*((.|\s)*?)\*/"
 """#
@@ -43,5 +41,5 @@ guard let simplifiedAst = simplify(for: ast) else {
         print("Error simplifying!")
         exit(-1)
 }
-print(simplifiedAst)
+//print(simplifiedAst)
 print("Ok.")
