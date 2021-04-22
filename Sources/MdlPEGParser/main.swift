@@ -5,7 +5,9 @@ import SwiftPEG
 // {} zero or more
 
 let syntax = #"""
-        root = _ argument_list
+        root = _ version _ argument_list
+
+        version = "mdl"
 
         argument_list = "(" _ arguments ")" _
         arguments = named_arguments / positional_named_arguments
