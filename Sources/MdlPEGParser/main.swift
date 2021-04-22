@@ -5,8 +5,10 @@ import SwiftPEG
 // {} zero or more
 
 let syntax = #"""
-        root = comment whitespace a
-        a = "a"
+        root = ignore* bla+
+        ignore = comment / whitespace
+        x = whitespace / comment
+        bla = "bla" whitespace
 
         argument_list = "(" _ arguments ")" _
         arguments = named_arguments / positional_named_arguments
@@ -20,9 +22,8 @@ let syntax = #"""
         additional_positional_argument = "," _ positional_argument _
 
         _ = ignore*
-        ignore = whitespace / comment
-        whitespace = ~"(\s|\n)*"
-        comment = ~"/\*((.|\n)*?)\*/"
+        whitespace = ~"\s*"
+        comment = ~"/\*((.|\s)*?)\*/"
 """#
  
 guard CommandLine.argc == 2 else {
@@ -41,7 +42,6 @@ guard let ast = parser.parse(for: input, with: "root") else {
 guard let simplifiedAst = simplify(for: ast) else {
         print("Error simplifying!")
         exit(-1)
-
 }
 print(simplifiedAst)
 print("Ok.")
