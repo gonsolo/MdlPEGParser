@@ -20,6 +20,7 @@ final class MdlPEGParserTests: XCTestCase {
         let pipe = Pipe()
         process.standardOutput = pipe
 
+        process.arguments = ["Data/test.mdl"]
         try process.run()
         process.waitUntilExit()
 

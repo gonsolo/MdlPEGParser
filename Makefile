@@ -1,6 +1,8 @@
 all:
-	swift run
-	#swift build
+	swift run MdlPEGParser Data/test.mdl
+t: test
+test:
+	swift test
 e: edit
 edit:
 	vi Sources/MdlPEGParser/main.swift

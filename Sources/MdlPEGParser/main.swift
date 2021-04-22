@@ -22,11 +22,17 @@ let syntax = #"""
         whitespace = ~"\s*"
 """#
 
-let text = "(pos, pos, bla: laber, bla: laber)"
+guard CommandLine.argc == 2 else {
+        print("Usage: MdlPEGParser <file>")
+        exit(0)
+}
+
+let fileName = CommandLine.arguments[1]
+let input = try String(contentsOfFile: fileName)
 
 let parser = Grammar(rules: syntax)
 
-guard let ast = parser.parse(for: text, with: "root") else {
+guard let ast = parser.parse(for: input, with: "root") else {
         print("Error!")
         exit(-1)
 }
