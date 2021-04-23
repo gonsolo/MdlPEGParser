@@ -40,5 +40,12 @@ export material gun_metal (
         anno::description("The base color of the material")
     ]],
     uniform float flake_amount        = .25         
+    [[ 
+        anno::display_name("Flake Amount"),
+        anno::soft_range(0.0, 1.0),
+        anno::description("The size of the particles in millimeters. If the particles don't appear "
+		"at all, check whether you are using the correct units in yout scene. The materials is built to "
+		"use meters as scene unit")
+    ]]
 )
 
