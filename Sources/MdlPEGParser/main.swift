@@ -25,7 +25,13 @@ let syntax = #"""
 
         parameter_list = parameter
 
-        parameter = type simple_name ( "=" _ assignment_expression)?
+        parameter = type simple_name ( "=" _ assignment_expression)? annotation_block?
+
+        annotation_block = "[[" _ annotation "]]" _
+
+        annotation = qualified_name argument_list _
+
+        qualified_name = ("::")? simple_name ( "::" simple_name )*
 
         assignment_expression = postfix_expression
 
@@ -35,7 +41,9 @@ let syntax = #"""
 
         primary_expression = literal_expression / simple_type
 
-        literal_expression = floating_literal
+        literal_expression = floating_literal / string_literal
+
+        string_literal = ~"\"" ~"[A-Za-z_ ]*" ~"\"" _
 
         version = "mdl" _ floating_literal ";" _
 
