@@ -67,16 +67,16 @@ let syntax = #"""
                         )?
                         ")" _
 
-
-
         named_argument = "bla" _ ":" _ "laber" _
-
 
         positional_argument = assignment_expression
 
         _ = ignore*
+
         ignore = comment / whitespace
+
         whitespace = ~"\s*"
+
         comment = ~"/\*((.|\s)*?)\*/"
 """#
  
