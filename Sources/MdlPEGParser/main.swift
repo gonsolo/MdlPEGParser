@@ -21,9 +21,9 @@ let syntax = #"""
 
         simple_type = relative_type
 
-        relative_type = ( "material" _ ) / ( "color" _ )
+        relative_type = ( "material" _ ) / ( "color" _ ) / ( "float" _ )
 
-        parameter_list = parameter
+        parameter_list = parameter ( "," _ parameter )*
 
         parameter = type simple_name ( "=" _ assignment_expression)? annotation_block?
 
@@ -57,7 +57,7 @@ let syntax = #"""
 
         identifier = ~"[A-Za-z_]+" _
 
-        floating_literal = ~"[0-9]*.[0-9]+"
+        floating_literal = ~"[0-9]*.[0-9]+" _
 
         argument_list = "(" _ arguments ")" _
         arguments = named_arguments / positional_named_arguments
