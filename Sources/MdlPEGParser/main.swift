@@ -11,7 +11,7 @@ let syntax = #"""
 
         global_declaration = function_declaration
 
-        function_declaration = type simple_name "(" _ parameter_list ")" _ annotation_block?
+        function_declaration = type simple_name "(" _ parameter_list ")" _ annotation_block? ( "=" )?
 
         type = frequency_qualifier? array_type
 
