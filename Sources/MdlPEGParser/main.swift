@@ -63,7 +63,7 @@ let syntax = #"""
                         (
                                 ( named_argument ( "," _ named_argument )* )
                                 /
-                                positional_named_arguments
+                                ( positional_argument ( "," _ positional_argument )* ( "," named_argument )* )
                         )?
                         ")" _
 
@@ -71,7 +71,6 @@ let syntax = #"""
 
         named_argument = "bla" _ ":" _ "laber" _
 
-        positional_named_arguments = positional_argument ( "," _ positional_argument )* ( "," named_argument )*
 
         positional_argument = assignment_expression
 
