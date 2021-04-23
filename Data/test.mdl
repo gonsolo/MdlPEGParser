@@ -34,6 +34,6 @@ import ::base::*;
 import ::anno::*;
 
 export material gun_metal (
-
+    uniform color base_color = color(0.08) 
 )
 

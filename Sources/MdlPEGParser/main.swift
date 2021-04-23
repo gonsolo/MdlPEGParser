@@ -11,15 +11,31 @@ let syntax = #"""
 
         global_declaration = function_declaration
 
-        function_declaration = type simple_name "(" _ ")" _
+        function_declaration = type simple_name "(" _ parameter_list ")" _
 
-        type = array_type
+        type = frequency_qualifier? array_type
+
+        frequency_qualifier = "uniform" _
 
         array_type = simple_type
 
         simple_type = relative_type
 
-        relative_type = "material" _
+        relative_type = ( "material" _ ) / ( "color" _ )
+
+        parameter_list = parameter
+
+        parameter = type simple_name ( "=" _ assignment_expression)?
+
+        assignment_expression = postfix_expression
+
+        postfix_expression = primary_expression postfix?
+
+        postfix = argument_list
+
+        primary_expression = literal_expression / simple_type
+
+        literal_expression = floating_literal
 
         version = "mdl" _ floating_literal ";" _
 
@@ -43,7 +59,7 @@ let syntax = #"""
         additional_named_argument = "," _ named_argument _
 
         positional_named_arguments = positional_argument additional_positional_argument* additional_named_argument*
-        positional_argument = "pos" _
+        positional_argument = assignment_expression
         additional_positional_argument = "," _ positional_argument _
 
         _ = ignore*
