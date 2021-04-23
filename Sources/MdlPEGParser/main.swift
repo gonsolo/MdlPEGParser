@@ -66,7 +66,7 @@ let syntax = #"""
         named_argument = "bla" _ ":" _ "laber" _
         additional_named_argument = "," _ named_argument _
 
-        positional_named_arguments = positional_argument additional_positional_argument* additional_named_argument*
+        positional_named_arguments = positional_argument ( "," _ positional_argument )* additional_named_argument*
         positional_argument = assignment_expression
         additional_positional_argument = "," _ positional_argument _
 
