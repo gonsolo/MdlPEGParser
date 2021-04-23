@@ -62,7 +62,7 @@ let syntax = #"""
         argument_list = "(" _ arguments ")" _
         arguments = named_arguments / positional_named_arguments
 
-        named_arguments = named_argument additional_named_argument*
+        named_arguments = named_argument ( "," _ named_argument )*
         named_argument = "bla" _ ":" _ "laber" _
         additional_named_argument = "," _ named_argument _
 
