@@ -68,7 +68,6 @@ let syntax = #"""
 
         positional_named_arguments = positional_argument ( "," _ positional_argument )* additional_named_argument*
         positional_argument = assignment_expression
-        additional_positional_argument = "," _ positional_argument _
 
         _ = ignore*
         ignore = comment / whitespace
