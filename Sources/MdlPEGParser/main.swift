@@ -7,7 +7,9 @@ import SwiftPEG
 let syntax = #"""
         root = _ version _ argument_list
 
-        version = "mdl"
+        version = "mdl" _ floating_literal ";"
+
+        floating_literal = ~"[0-9]*.[0-9]+"
 
         argument_list = "(" _ arguments ")" _
         arguments = named_arguments / positional_named_arguments
