@@ -5,9 +5,19 @@ import SwiftPEG
 // {} zero or more
 
 let syntax = #"""
-        root = _ version _ argument_list
+        root = _ version import* argument_list
 
-        version = "mdl" _ floating_literal ";"
+        version = "mdl" _ floating_literal ";" _
+
+        import = "import" _ qualified_import
+
+        qualified_import = import_path "::" _ "*" ";" _
+
+        import_path = "::" simple_name
+
+        simple_name = identifier
+
+        identifier = ~"[A-Za-z]+" _
 
         floating_literal = ~"[0-9]*.[0-9]+"
 
