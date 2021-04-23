@@ -5,7 +5,21 @@ import SwiftPEG
 // {} zero or more
 
 let syntax = #"""
-        root = _ version import* argument_list
+        root = _ version import* global_declarations
+
+        global_declarations = "export"? _ global_declaration
+
+        global_declaration = function_declaration
+
+        function_declaration = type simple_name "(" _ ")" _
+
+        type = array_type
+
+        array_type = simple_type
+
+        simple_type = relative_type
+
+        relative_type = "material" _
 
         version = "mdl" _ floating_literal ";" _
 
@@ -17,7 +31,7 @@ let syntax = #"""
 
         simple_name = identifier
 
-        identifier = ~"[A-Za-z]+" _
+        identifier = ~"[A-Za-z_]+" _
 
         floating_literal = ~"[0-9]*.[0-9]+"
 
