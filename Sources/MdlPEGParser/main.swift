@@ -27,7 +27,7 @@ let syntax = #"""
 
         parameter = type simple_name ( "=" _ assignment_expression)? annotation_block?
 
-        annotation_block = "[[" _ annotation "]]" _
+        annotation_block = "[[" _ annotation ( "," _ annotation )* "]]" _
 
         annotation = qualified_name argument_list _
 

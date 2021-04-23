@@ -35,8 +35,9 @@ import ::anno::*;
 
 export material gun_metal (
     uniform color base_color = color(0.08) 
-    [[
-        anno::display_name("Base color")
+    [[ 
+        anno::display_name("Base color"),
+        anno::description("The base color of the material")
     ]]
 )
 
