@@ -60,11 +60,14 @@ let syntax = #"""
         floating_literal = ~"[0-9]*.[0-9]+" _
 
         argument_list = "(" _
-                        ( named_arguments / positional_named_arguments )?
+                        (
+                                ( named_argument ( "," _ named_argument )* )
+                                /
+                                positional_named_arguments
+                        )?
                         ")" _
 
 
-        named_arguments = named_argument ( "," _ named_argument )*
 
         named_argument = "bla" _ ":" _ "laber" _
 
