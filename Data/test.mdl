@@ -47,5 +47,10 @@ export material gun_metal (
 		"at all, check whether you are using the correct units in yout scene. The materials is built to "
 		"use meters as scene unit")
     ]]
-)
+) [[
+        anno::copyright_notice (
+        "Copyright 2020 NVIDIA Corporation. All rights reserved."),
+        anno::author("NVIDIA corporation"),
+        anno::display_name("Gun Metal")
+    ]]
 
