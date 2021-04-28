@@ -102,7 +102,7 @@ let syntax = #"""
                         )?
                         ")" _
 
-        named_argument = "bla" _ ":" _ "laber" _
+        named_argument = simple_name ":" _ assignment_expression
 
         positional_argument = assignment_expression
 
