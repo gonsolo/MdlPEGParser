@@ -64,7 +64,9 @@ let syntax = #"""
 
         let_expression = "let" _ "{" _ variable_declaration "}" _
 
-        variable_declaration = type _
+        variable_declaration = type variable_declarator ";" _
+
+        variable_declarator = simple_name ( "=" _ assignment_expression )?
 
         postfix_expression = primary_expression postfix?
 
@@ -73,7 +75,10 @@ let syntax = #"""
         primary_expression = literal_expression / simple_type
 
         literal_expression =    floating_literal
+                           / integer_literal
                            /    ( string_literal ( string_literal )* )
+
+        integer_literal = ~"[0-9]+"
 
         string_literal = ~"\"" ~"[0-9A-Za-z.',_ ]*" ~"\"" _
 

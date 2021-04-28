@@ -54,6 +54,6 @@ export material gun_metal (
     anno::display_name("Gun Metal")
 ]] = let
 {
-    color /* flake_color               = color(1,1,1); */
+    color flake_color               = color(1,1,1);
 }
 EOF
