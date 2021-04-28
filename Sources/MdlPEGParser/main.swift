@@ -62,7 +62,7 @@ let syntax = #"""
 
         unary_expression = let_expression / postfix_expression
 
-        let_expression = "let" _ "{" _ variable_declaration "}" _
+        let_expression = "let" _ "{" _ variable_declaration ( variable_declaration )* "}" _
 
         variable_declaration = type variable_declarator ";" _
 

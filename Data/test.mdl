@@ -55,5 +55,6 @@ export material gun_metal (
 ]] = let
 {
     color flake_color               = color(1,1,1);
+    float flake_intensity           = .8;
 }
 EOF
