@@ -74,5 +74,13 @@ export material gun_metal (
     bsdf base = df::diffuse_reflection_bsdf (
         tint: base_color * 0.2
     );
- }
+
+    float3 flake_bump = base::flake_noise_bump_texture(
+        uvw: uvw,
+        strength: flake_bumpiness,
+        scale: particle_size*flake_scale
+    );
+
+}
+
 EOF
