@@ -1,7 +1,7 @@
 import Foundation
 import SwiftPEG
 
-// [] optional
+// [] zero or one (optional)
 // {} zero or more
 
 let syntax = #"""
@@ -62,7 +62,9 @@ let syntax = #"""
 
         unary_expression = let_expression / postfix_expression
 
-        let_expression = "let" _
+        let_expression = "let" _ "{" _ variable_declaration "}" _
+
+        variable_declaration = type _
 
         postfix_expression = primary_expression postfix?
 
