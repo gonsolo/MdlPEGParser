@@ -25,12 +25,19 @@ let syntax = #"""
 
         simple_type = relative_type
 
-        relative_type = ( "material" _ )        /
-                        ( "color" _ )           /
-                        ( "float3" _ )          /
-                        ( "float" _ )           /
+        relative_type = material                /
+                        color                   /
+                        float3                  /
+                        float                   /
                         ( identifier ( "::" relative_type )? )
 
+        material = "material" !identifier _
+
+        color = "color" !identifier _
+
+        float3 = "float3" !identifier _
+
+        float = "float" !identifier _
 
         parameter_list = parameter ( "," _ parameter )*
 
