@@ -24,7 +24,7 @@ let syntax = #"""
 
         simple_type = relative_type
 
-        relative_type = ( "material" _ ) / ( "color" _ ) / ( "float" _ ) / identifier
+        relative_type = ( "material" _ ) / ( "color" _ ) / ( "float" _ ) / ( identifier ( "::" relative_type )? )
 
         parameter_list = parameter ( "," _ parameter )*
 
@@ -45,8 +45,6 @@ let syntax = #"""
         inclusive_or_expression = exclusive_or_expression
 
         exclusive_or_expression = and_expression
-
-        and_expression = and_expression
 
         and_expression = equality_expression
 
@@ -92,7 +90,7 @@ let syntax = #"""
 
         simple_name = identifier
 
-        identifier = ~"[A-Za-z_]+" _
+        identifier = ~"[A-Za-z0-9_]+" _
 
         floating_literal = ~"[0-9]*.[0-9]+" _
 
