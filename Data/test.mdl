@@ -70,5 +70,9 @@ export material gun_metal (
         roughness_u: flake_roughness,
         tint: flake_color
     );
+
+    bsdf base = df::diffuse_reflection_bsdf (
+        tint: base_color * 0.2
+    );
  }
 EOF
