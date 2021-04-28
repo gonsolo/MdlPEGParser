@@ -58,7 +58,7 @@ let syntax = #"""
 
         additive_expression = multiplicative_expression
 
-        multiplicative_expression = unary_expression
+        multiplicative_expression = unary_expression ( "*" _ multiplicative_expression )*
 
         unary_expression = let_expression / postfix_expression
 

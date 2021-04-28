@@ -60,5 +60,7 @@ export material gun_metal (
     float flake_bumpiness           = .25;
 
 	// Scaling the particle size parameters to give the right average size of
+	// the particles in the render
+	uniform float flake_scale  = /* particle_size * */ 0.8 * 0.0008;
 }
 EOF
