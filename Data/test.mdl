@@ -65,5 +65,10 @@ export material gun_metal (
     float flake_amount_2 = math::lerp(0.2,0.6,flake_amount);
 
     base::texture_coordinate_info uvw = base::coordinate_source(coordinate_system: base::texture_coordinate_object);
-}
+
+    bsdf flake = df::simple_glossy_bsdf(
+        roughness_u: flake_roughness,
+        tint: flake_color
+    );
+ }
 EOF
