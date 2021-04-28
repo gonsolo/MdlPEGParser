@@ -5,14 +5,14 @@ import SwiftPEG
 // {} zero or more
 
 let syntax = #"""
-        root = _ version import* global_declarations
+        root = _ version import* global_declarations "EOF"
 
         global_declarations = "export"? _ global_declaration
 
         global_declaration = function_declaration
 
         function_declaration = type simple_name
-                               "(" _ parameter_list ")" _
+                               "(" _ parameter_list ")" _ annotation_block _
 
         type = frequency_qualifier? array_type
 
