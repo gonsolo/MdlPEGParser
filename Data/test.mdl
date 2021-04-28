@@ -56,5 +56,9 @@ export material gun_metal (
 {
     color flake_color               = color(1,1,1);
     float flake_intensity           = .8;
+    float flake_roughness           = .3;
+    float flake_bumpiness           = .25;
+
+	// Scaling the particle size parameters to give the right average size of
 }
 EOF

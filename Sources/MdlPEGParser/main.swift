@@ -110,11 +110,13 @@ let syntax = #"""
 
         _ = ignore*
 
-        ignore = comment / whitespace
+        ignore = block_comment / line_comment / whitespace
 
         whitespace = ~"\s*"
 
-        comment = ~"/\*((.|\s)*?)\*/"
+        block_comment = ~"/\*((.|\s)*?)\*/"
+
+        line_comment = ~"//((.|\s)*?)\n"
 """#
  
 guard CommandLine.argc == 2 else {
