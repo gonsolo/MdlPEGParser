@@ -52,6 +52,6 @@ export material gun_metal (
     "Copyright 2020 NVIDIA Corporation. All rights reserved."),
     anno::author("NVIDIA corporation"),
     anno::display_name("Gun Metal")
-]]
+]] =
 
 EOF
