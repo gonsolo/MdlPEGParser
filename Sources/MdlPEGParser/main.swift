@@ -12,7 +12,9 @@ let syntax = #"""
         global_declaration = function_declaration
 
         function_declaration = type simple_name
-                               "(" _ parameter_list ")" _ annotation_block _ "=" _
+                               "(" _ parameter_list ")" _ annotation_block _ "=" _ expression
+
+        expression = assignment_expression
 
         type = frequency_qualifier? array_type
 
@@ -34,7 +36,33 @@ let syntax = #"""
 
         qualified_name = ("::")? simple_name ( "::" simple_name )*
 
-        assignment_expression = postfix_expression
+        assignment_expression = logical_or_expression
+
+        logical_or_expression = logical_and_expression
+
+        logical_and_expression = inclusive_or_expression
+
+        inclusive_or_expression = exclusive_or_expression
+
+        exclusive_or_expression = and_expression
+
+        and_expression = and_expression
+
+        and_expression = equality_expression
+
+        equality_expression = relational_expression
+
+        relational_expression = shift_expression
+
+        shift_expression = additive_expression
+
+        additive_expression = multiplicative_expression
+
+        multiplicative_expression = unary_expression
+
+        unary_expression = let_expression / postfix_expression
+
+        let_expression = "let" _
 
         postfix_expression = primary_expression postfix?
 
