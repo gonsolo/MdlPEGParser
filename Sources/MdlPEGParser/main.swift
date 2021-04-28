@@ -70,9 +70,7 @@ let syntax = #"""
 
         variable_declarator = simple_name ( "=" _ assignment_expression )?
 
-        postfix_expression = primary_expression postfix?
-
-        postfix = argument_list
+        postfix_expression = primary_expression ( argument_list / ( "." _ simple_name) )*
 
         primary_expression = literal_expression / simple_type
 

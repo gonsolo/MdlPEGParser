@@ -81,6 +81,13 @@ export material gun_metal (
         scale: particle_size*flake_scale
     );
 
+    float flake_weight = base::flake_noise_texture(
+        uvw: uvw,
+        intensity: flake_intensity,
+        scale: particle_size*flake_scale,
+        density: flake_amount_2
+    ).mono;
+
 }
 
 EOF
