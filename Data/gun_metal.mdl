@@ -94,7 +94,7 @@ export material gun_metal (
         scale: particle_size*flake_scale,
         density: flake_amount_2
     ).mono;
-    
+
 } in material (
     surface: material_surface (
         scattering: df::weighted_layer(

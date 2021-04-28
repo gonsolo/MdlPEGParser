@@ -12,7 +12,8 @@ let syntax = #"""
         global_declaration = function_declaration
 
         function_declaration = type simple_name
-                               "(" _ parameter_list ")" _ annotation_block _ "=" _ expression
+                               "(" _ parameter_list ")" _ annotation_block _
+                               "=" _ expression ";" _
 
         expression = assignment_expression
 
@@ -29,6 +30,7 @@ let syntax = #"""
                         ( "float3" _ )          /
                         ( "float" _ )           /
                         ( identifier ( "::" relative_type )? )
+
 
         parameter_list = parameter ( "," _ parameter )*
 
@@ -64,7 +66,9 @@ let syntax = #"""
 
         unary_expression = let_expression / postfix_expression
 
-        let_expression = "let" _ "{" _ variable_declaration ( variable_declaration )* "}" _
+        let_expression =        "let" _
+                                "{" _ variable_declaration ( variable_declaration )* "}" _
+                                "in" _ unary_expression
 
         variable_declaration = type variable_declarator ";" _
 
