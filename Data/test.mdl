@@ -88,7 +88,14 @@ export material gun_metal (
         density: flake_amount_2
     ).mono;
 } in material(
-        surface: material_surface
+        surface: material_surface(
+                scattering: df::weighted_layer(
+                        weight: flake_weight,
+                        normal: flake_bump,
+                        layer: flake,
+                        base: base
+                )
+        )
 );
 
 EOF
