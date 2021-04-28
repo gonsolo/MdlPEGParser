@@ -48,7 +48,8 @@ export material gun_metal (
 		"use meters as scene unit")
     ]]
 ) [[
-        anno::display_name("Base color")
+    anno::copyright_notice (
+    "Copyright 2020 NVIDIA Corporation. All rights reserved.")
 ]]
 
 EOF

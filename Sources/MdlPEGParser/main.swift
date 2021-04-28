@@ -45,7 +45,7 @@ let syntax = #"""
         literal_expression =    floating_literal
                            /    ( string_literal ( string_literal )* )
 
-        string_literal = ~"\"" ~"[A-Za-z.',_ ]*" ~"\"" _
+        string_literal = ~"\"" ~"[0-9A-Za-z.',_ ]*" ~"\"" _
 
         version = "mdl" _ floating_literal ";" _
 
