@@ -5,7 +5,7 @@ import SwiftPEG
 // {} zero or more
 
 let syntax = #"""
-        root = _ version import* global_declarations "EOF"
+        root = _ version import* global_declarations 
 
         global_declarations = "export"? _ global_declaration
 

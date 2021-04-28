@@ -1,5 +1,6 @@
 all:
-	swift run MdlPEGParser Data/test.mdl
+	#swift run MdlPEGParser Data/test.mdl
+	swift run MdlPEGParser Data/gun_metal.mdl
 t: test
 test:
 	swift test
