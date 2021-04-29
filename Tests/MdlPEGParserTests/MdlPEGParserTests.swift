@@ -20,14 +20,14 @@ final class MdlPEGParserTests: XCTestCase {
         let pipe = Pipe()
         process.standardOutput = pipe
 
-        process.arguments = ["Data/test.mdl"]
+        process.arguments = ["Data/gun_metal.mdl"]
         try process.run()
         process.waitUntilExit()
 
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         let output = String(data: data, encoding: .utf8)
 
-        XCTAssertEqual(output, "Ok.\n")
+        XCTAssertEqual(output, "Parsing ok.\n")
     }
 
     /// Returns path to the built products directory.

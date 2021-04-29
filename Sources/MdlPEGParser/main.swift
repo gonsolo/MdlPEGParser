@@ -148,4 +148,4 @@ guard let simplifiedAst = simplify(for: ast) else {
         exit(-1)
 }
 //print(simplifiedAst)
-print("Ok.")
+print("Parsing ok.")
