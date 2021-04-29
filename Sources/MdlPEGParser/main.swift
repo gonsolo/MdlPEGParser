@@ -153,12 +153,22 @@ print("Parsing ok.")
 
 //print(ast)
 
-let module = Module(name: "main")
+let module = Module(name: "mdl_test")
 let builder = IRBuilder(module: module)
-let main = builder.addFunction("main", type: FunctionType([], IntType.int64))
-let entry = main.appendBasicBlock(named: "entry")
+let bla = builder.addFunction("bla", type: FunctionType([], IntType.int64))
+let entry = bla.appendBasicBlock(named: "entry")
 builder.positionAtEnd(of: entry)
 let constant = IntType.int64.constant(21)
 let sum = builder.buildAdd(constant, constant)
 builder.buildRet(sum)
-module.dump()
+//module.dump()
+
+let jit = try JIT(machine: TargetMachine())
+typealias FnPtr = @convention(c) () -> Int64
+_ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
+        return JIT.TargetAddress()
+}
+let addr = try jit.address(of: "bla")
+let fn = unsafeBitCast(addr, to: FnPtr.self)
+print(fn())
+
