@@ -1,6 +1,7 @@
 all:
 	#swift run MdlPEGParser Data/test.mdl
 	swift run MdlPEGParser Data/gun_metal.mdl
+	gimp fortyTwo.pbm
 t: test
 test:
 	swift test

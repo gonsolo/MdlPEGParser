@@ -148,10 +148,7 @@ guard let simplifiedAst = simplify(for: ast) else {
         print("Error simplifying!")
         exit(-1)
 }
-//print(simplifiedAst)
 print("Parsing ok.")
-
-//print(ast)
 
 let module = Module(name: "mdl_test")
 let builder = IRBuilder(module: module)
@@ -168,5 +165,19 @@ _ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
 }
 let address = try jit.address(of: "bla")
 let function = unsafeBitCast(address, to: FunctionPointer.self)
-print(function())
+
+var pbm = """
+P2
+4 4
+255
+
+"""
+for _ in 0..<16 {
+        pbm += String(function()) + " "
+}
+
+var pbmName = "./fortyTwo.pbm"
+var pbmURL = URL(fileURLWithPath: pbmName)
+
+try pbm.write(to: pbmURL, atomically: true, encoding: String.Encoding.utf8)
 
