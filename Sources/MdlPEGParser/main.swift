@@ -161,14 +161,12 @@ builder.positionAtEnd(of: entry)
 let constant = IntType.int64.constant(21)
 let sum = builder.buildAdd(constant, constant)
 builder.buildRet(sum)
-//module.dump()
-
 let jit = try JIT(machine: TargetMachine())
-typealias FnPtr = @convention(c) () -> Int64
+typealias FunctionPointer = @convention(c) () -> Int64
 _ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
         return JIT.TargetAddress()
 }
-let addr = try jit.address(of: "bla")
-let fn = unsafeBitCast(addr, to: FnPtr.self)
-print(fn())
+let address = try jit.address(of: "bla")
+let function = unsafeBitCast(address, to: FunctionPointer.self)
+print(function())
 
