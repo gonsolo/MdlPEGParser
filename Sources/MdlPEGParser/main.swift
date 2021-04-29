@@ -189,13 +189,13 @@ _ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
 let address = try jit.address(of: "bla")
 let function = unsafeBitCast(address, to: FunctionPointer.self)
 
-var pbm = """
-P2
-4 4
-255
+let width = 512
+let height = 512
 
-"""
-for _ in 0..<16 {
+var pbm = "P2 "
+pbm += String(width) + " " + String(height) + " "
+pbm += String(255) + " "
+for _ in 0..<(width * height) {
         pbm += String(function()) + " "
 }
 
