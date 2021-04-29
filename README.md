@@ -5,7 +5,7 @@ A PEG Parser for a NVIDIA MDL (Material Definition Language) material.
 NVIDIAs MDL SDK uses a LL(1) parser with conflict resolution allowing LL(k)
 grammars. MDLPEGParser is a Parsing Expression Grammar (PEG) parser for a
 subset of MDL (effectivly only the gun_metal.mdl material) which is slightly
-more elegant as it doesn't need any hacks for e.g. named arguments (which need
+more elegant as it doesn't need any hacks for e.g. named arguments (that need
 a lookahead of 2).
 
 Also included is a tiny LLVM JIT code generator which at the moment just takes
