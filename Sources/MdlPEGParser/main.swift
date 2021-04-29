@@ -1,5 +1,6 @@
 import Foundation
 import SwiftPEG
+import LLVM
 
 // [] zero or one (optional)
 // {} zero or more
@@ -151,3 +152,5 @@ guard let simplifiedAst = simplify(for: ast) else {
 print("Parsing ok.")
 
 //print(ast)
+
+let module = Module(name: "main")
