@@ -156,9 +156,9 @@ var value: Int = 0
 func walk(node: Node) {
         if node.name == "floating_literal" {
                 counter += 1
-                // Just take to second float value (the first one is the version)
-                // and write it to a pbm image. In the gun_metal material it is
-                // the base_color.
+                // For experimenting, just take the second float value (the first
+                // one is the version)  and write it to a pbm image.
+                // In the gun_metal material this is the base_color.
                 if counter == 2 {
                         guard let f = Float(node.text) else {
                                 print("Error: No float!")
