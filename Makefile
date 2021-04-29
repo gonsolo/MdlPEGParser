@@ -9,7 +9,8 @@ e: edit
 edit:
 	vi Sources/MdlPEGParser/main.swift
 d:
-	vi Data/test.mdl
+	#vi Data/test.mdl
+	vi Data/gun_metal.mdl
 b:
 	vi Data/gun_metal.mdl Data/test.mdl
 c: clean

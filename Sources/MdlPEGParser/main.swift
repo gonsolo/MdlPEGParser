@@ -150,14 +150,37 @@ guard let simplifiedAst = simplify(for: ast) else {
 }
 print("Parsing ok.")
 
+var counter = 0
+var value: Int = 0
+
+func walk(node: Node) {
+        if node.name == "floating_literal" {
+                counter += 1
+                // Just take to second float value (the first one is the version)
+                // and write it to a pbm image. In the gun_metal material it is
+                // the base_color.
+                if counter == 2 {
+                        guard let f = Float(node.text) else {
+                                print("Error: No float!")
+                                exit(-1)
+                        }
+                        value = Int(255 * f)
+                }
+        }
+        for child in node.children {
+                walk(node: child)
+        }
+}
+
+walk(node: ast)
+
 let module = Module(name: "mdl_test")
 let builder = IRBuilder(module: module)
 let bla = builder.addFunction("bla", type: FunctionType([], IntType.int64))
 let entry = bla.appendBasicBlock(named: "entry")
 builder.positionAtEnd(of: entry)
-let constant = IntType.int64.constant(21)
-let sum = builder.buildAdd(constant, constant)
-builder.buildRet(sum)
+let constant = IntType.int64.constant(value)
+builder.buildRet(constant)
 let jit = try JIT(machine: TargetMachine())
 typealias FunctionPointer = @convention(c) () -> Int64
 _ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
