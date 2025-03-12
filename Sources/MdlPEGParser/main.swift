@@ -185,12 +185,7 @@ builder.buildRet(constant)
 
 let jit = JIT()
 let address = jit.compile(module: module, name: "bla")
-//let jit = try JIT(machine: TargetMachine())
 typealias FunctionPointer = @convention(c) () -> Int64
-//_ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
-//  return JIT.TargetAddress()
-//}
-//let address = try jit.address(of: "bla")
 let function = unsafeBitCast(address, to: FunctionPointer.self)
 
 let width = 512
@@ -200,7 +195,6 @@ var pbm = "P2 "
 pbm += String(width) + " " + String(height) + " "
 pbm += String(255) + " "
 for _ in 0..<(width * height) {
-  // JIT does not work since all ORC LLVM stuff in LLVMSwift is deleted
   pbm += String(function()) + " "
 }
 
