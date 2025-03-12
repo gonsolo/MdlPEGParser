@@ -1,8 +1,8 @@
 import XCTest
 import class Foundation.Bundle
 
-final class MdlPEGParserTests: XCTestCase {
-func testExample() throws {
+final class MdlPegParserTests: XCTestCase {
+  func testExample() throws {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct
     // results.
@@ -12,7 +12,7 @@ func testExample() throws {
       return
     }
 
-    let fooBinary = productsDirectory.appendingPathComponent("MdlPEGParser")
+    let fooBinary = productsDirectory.appendingPathComponent("MdlPegParser")
 
     let process = Process()
     process.executableURL = fooBinary

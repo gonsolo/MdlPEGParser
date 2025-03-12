@@ -1,13 +1,12 @@
 all:
-	@#swift run MdlPEGParser Data/test.mdl
-	swift run MdlPEGParser Data/gun_metal.mdl
+	swift run MdlPegParser Data/gun_metal.mdl
 	gimp fortyTwo.pbm
 t: test
 test:
 	swift test
 e: edit
 edit:
-	vi Sources/MdlPEGParser/main.swift
+	vi Sources/MdlPegParser/main.swift
 d:
 	#vi Data/test.mdl
 	vi Data/gun_metal.mdl

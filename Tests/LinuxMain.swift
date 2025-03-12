@@ -1,6 +1,6 @@
-import MdlPEGParserTests
+import MdlPegParserTests
 import XCTest
 
 var tests = [XCTestCaseEntry]()
-tests += MdlPEGParserTests.allTests()
+tests += MdlPegParserTests.allTests()
 XCTMain(tests)

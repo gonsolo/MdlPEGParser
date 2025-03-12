@@ -2,9 +2,6 @@ import Foundation
 import LLVM
 import SwiftPEG
 
-// [] zero or one (optional)
-// {} zero or more
-
 let syntax = #"""
         root = _ version import* global_declarations 
 
