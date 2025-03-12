@@ -27,7 +27,7 @@ func testExample() throws {
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     let output = String(data: data, encoding: .utf8)
 
-    XCTAssertEqual(output, "Parsing ok.\n0.38\n")
+    XCTAssertEqual(output, "Parsing ok.\n")
   }
 
   /// Returns path to the built products directory.

@@ -160,7 +160,6 @@ func walk(node: Node) {
     // one is the version)  and write it to a pbm image.
     // In the gun_metal material this is the base_color.
     if counter == 2 {
-      print(node.text)
       guard let f = Float(node.text) else {
         print("Error: No float!")
         exit(-1)
