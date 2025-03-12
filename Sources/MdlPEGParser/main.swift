@@ -137,7 +137,7 @@ guard CommandLine.argc == 2 else {
 }
 
 let fileName = CommandLine.arguments[1]
-let input = try String(contentsOfFile: fileName)
+let input = try String(contentsOfFile: fileName, encoding: .ascii)
 let parser = Grammar(rules: syntax)
 
 guard let ast = parser.parse(for: input, with: "root") else {
@@ -174,6 +174,7 @@ func walk(node: Node) {
 
 walk(node: ast)
 
+print("This does not work currently: Update LLVMSwift to include LLVM's ORCv2")
 let module = Module(name: "mdl_test")
 let builder = IRBuilder(module: module)
 let bla = builder.addFunction("bla", type: FunctionType([], IntType.int64))
@@ -184,7 +185,7 @@ builder.buildRet(constant)
 let jit = try JIT(machine: TargetMachine())
 typealias FunctionPointer = @convention(c) () -> Int64
 _ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
-        return JIT.TargetAddress()
+  return JIT.TargetAddress()
 }
 let address = try jit.address(of: "bla")
 let function = unsafeBitCast(address, to: FunctionPointer.self)
@@ -196,11 +197,11 @@ var pbm = "P2 "
 pbm += String(width) + " " + String(height) + " "
 pbm += String(255) + " "
 for _ in 0..<(width * height) {
-        pbm += String(function()) + " "
+  // JIT does not work since all ORC LLVM stuff in LLVMSwift is deleted
+  // pbm += String(function()) + " "
 }
 
 var pbmName = "./fortyTwo.pbm"
 var pbmURL = URL(fileURLWithPath: pbmName)
 
 try pbm.write(to: pbmURL, atomically: true, encoding: String.Encoding.utf8)
-
