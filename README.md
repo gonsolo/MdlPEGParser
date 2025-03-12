@@ -14,3 +14,4 @@ the second float value in the material (the first one is the MDL version) which
 happens to be the base_color in the gun_metal material, and writes it to a pbm
 image.
 
+© 2025 Andreas Wendleder
