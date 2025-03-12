@@ -1,6 +1,6 @@
 import Foundation
-import SwiftPEG
 import LLVM
+import SwiftPEG
 
 // [] zero or one (optional)
 // {} zero or more
@@ -130,10 +130,10 @@ let syntax = #"""
 
         line_comment = ~"//((.|\s)*?)\n"
 """#
- 
+
 guard CommandLine.argc == 2 else {
-        print("Usage: MdlPEGParser <file>")
-        exit(0)
+  print("Usage: MdlPEGParser <file>")
+  exit(0)
 }
 
 let fileName = CommandLine.arguments[1]
@@ -141,12 +141,12 @@ let input = try String(contentsOfFile: fileName, encoding: .ascii)
 let parser = Grammar(rules: syntax)
 
 guard let ast = parser.parse(for: input, with: "root") else {
-        print("Error parsing!")
-        exit(-1)
+  print("Error parsing!")
+  exit(-1)
 }
 guard let simplifiedAst = simplify(for: ast) else {
-        print("Error simplifying!")
-        exit(-1)
+  print("Error simplifying!")
+  exit(-1)
 }
 print("Parsing ok.")
 
@@ -154,27 +154,27 @@ var counter = 0
 var value: Int = 0
 
 func walk(node: Node) {
-        if node.name == "floating_literal" {
-                counter += 1
-                // For experimenting, just take the second float value (the first
-                // one is the version)  and write it to a pbm image.
-                // In the gun_metal material this is the base_color.
-                if counter == 2 {
-                        guard let f = Float(node.text) else {
-                                print("Error: No float!")
-                                exit(-1)
-                        }
-                        value = Int(255 * f)
-                }
-        }
-        for child in node.children {
-                walk(node: child)
-        }
+  if node.name == "floating_literal" {
+    counter += 1
+    // For experimenting, just take the second float value (the first
+    // one is the version)  and write it to a pbm image.
+    // In the gun_metal material this is the base_color.
+    if counter == 2 {
+      print(node.text)
+      guard let f = Float(node.text) else {
+        print("Error: No float!")
+        exit(-1)
+      }
+      value = Int(255 * f)
+    }
+  }
+  for child in node.children {
+    walk(node: child)
+  }
 }
 
 walk(node: ast)
 
-print("This does not work currently: Update LLVMSwift to include LLVM's ORCv2")
 let module = Module(name: "mdl_test")
 let builder = IRBuilder(module: module)
 let bla = builder.addFunction("bla", type: FunctionType([], IntType.int64))
@@ -182,12 +182,15 @@ let entry = bla.appendBasicBlock(named: "entry")
 builder.positionAtEnd(of: entry)
 let constant = IntType.int64.constant(value)
 builder.buildRet(constant)
-let jit = try JIT(machine: TargetMachine())
+
+let jit = JIT()
+let address = jit.compile(module: module, name: "bla")
+//let jit = try JIT(machine: TargetMachine())
 typealias FunctionPointer = @convention(c) () -> Int64
-_ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
-  return JIT.TargetAddress()
-}
-let address = try jit.address(of: "bla")
+//_ = try jit.addEagerlyCompiledIR(module) { (name) -> JIT.TargetAddress in
+//  return JIT.TargetAddress()
+//}
+//let address = try jit.address(of: "bla")
 let function = unsafeBitCast(address, to: FunctionPointer.self)
 
 let width = 512
@@ -198,7 +201,7 @@ pbm += String(width) + " " + String(height) + " "
 pbm += String(255) + " "
 for _ in 0..<(width * height) {
   // JIT does not work since all ORC LLVM stuff in LLVMSwift is deleted
-  // pbm += String(function()) + " "
+  pbm += String(function()) + " "
 }
 
 var pbmName = "./fortyTwo.pbm"
